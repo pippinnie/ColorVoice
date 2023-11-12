@@ -61,26 +61,26 @@
     // get available devices
     const devices = await navigator.mediaDevices.enumerateDevices();
 
-    var deviceToUse = "";
     var deviceLabel = ""; //Used to check if permissions have been accepted, enumerateDevices() runs without needing to accept permissions
 
     for (var i = 0; i < devices.length; i++) {
       deviceLabel = devices[i].label;
       if (devices[i].kind === "videoinput") {
-        if (
-          devices[i].label.includes("0") ||
-          devices[i].label.includes("Back")
-        ) {
-          deviceToUse = devices[i].deviceId;
-          break;
+        if (devices[i].label.includes("0")) {
+          return {
+            deviceId: devices[i].deviceId,
+          };
         }
       }
     }
-
-    if (deviceToUse !== "") {
-      return {
-        deviceId: deviceToUse,
-      };
+    for (var i = 0; i < devices.length; i++) {
+      if (devices[i].kind === "videoinput") {
+        if (devices[i].label.includes("Back")) {
+          return {
+            deviceId: devices[i].deviceId,
+          };
+        }
+      }
     }
 
     return {
