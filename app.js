@@ -66,6 +66,7 @@
     for (var i = 0; i < devices.length; i++) {
       deviceLabel = devices[i].label;
       if (devices[i].kind === "videoinput") {
+        alert(devices[i].label);
         if (devices[i].label.includes("0")) {
           return {
             deviceId: devices[i].deviceId,
