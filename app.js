@@ -57,6 +57,37 @@
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
 
+  async function getVideoConstraints() {
+    // get available devices
+    const devices = await navigator.mediaDevices.enumerateDevices();
+
+    var deviceToUse = "";
+    var deviceLabel = ""; //Used to check if permissions have been accepted, enumerateDevices() runs without needing to accept permissions
+
+    for (var i = 0; i < devices.length; i++) {
+      deviceLabel = devices[i].label;
+      if (devices[i].kind === "videoinput") {
+        if (
+          devices[i].label.includes("0") ||
+          devices[i].label.includes("Back")
+        ) {
+          deviceToUse = devices[i].deviceId;
+          break;
+        }
+      }
+    }
+
+    if (deviceToUse !== "") {
+      return {
+        deviceId: deviceToUse,
+      };
+    }
+
+    return {
+      facingMode: "environment",
+    };
+  }
+
   document.addEventListener("DOMContentLoaded", async function () {
     video = document.getElementById("video");
     canvas = document.getElementById("canvas");
@@ -66,9 +97,8 @@
     // After the page is loaded, it will get the video streaming from the rear camera.
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "environment",
-        },
+        audio: false,
+        video: await getVideoConstraints(),
       });
       video.srcObject = stream;
     } catch (error) {
