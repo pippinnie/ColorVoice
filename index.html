@@ -3,7 +3,7 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
     <script src="nearestColor.js"></script>
-    <script src="mainColors.js"></script>
+    <script src="colors.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <title>ColorVoice Buddy</title>
@@ -11,7 +11,9 @@
 
   <body>
     <h1 id="title">ColorVoice</h1>
-    <!-- <p><button id="take-photo">Take a Photo</button></p> -->
+    <div class="toggle">
+      <button id="toggle-camera">Toggle Camera</button>
+    </div>
     <video id="video" autoplay></video>
 
     <canvas id="canvas"> </canvas>

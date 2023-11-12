@@ -1,4 +1,4 @@
-// Set common color names
+// Set color names
 var colors = {
   IndianRed: "#CD5C5C",
   LightCoral: "#F08080",

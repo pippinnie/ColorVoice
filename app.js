@@ -12,9 +12,12 @@
   // Take a still image from the streaming video into the 'photo' element
   function takepicture() {
     const context = canvas.getContext("2d");
+
     if (width && height) {
       canvas.width = width;
       canvas.height = height;
+
+      // adjust to have more saturation
       context.filter = "saturate(200%)";
       context.drawImage(video, 0, 0, width, height);
 
@@ -92,13 +95,8 @@
     };
   }
 
-  document.addEventListener("DOMContentLoaded", async function () {
-    video = document.getElementById("video");
-    canvas = document.getElementById("canvas");
-    photo = document.getElementById("photo");
-    button = document.getElementById("take-photo");
-
-    // After the page is loaded, it will get the video streaming from the rear camera.
+  // To start the camera
+  async function startVideo() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: false,
@@ -108,6 +106,29 @@
     } catch (error) {
       console.error("Error accessing the camera: " + error);
     }
+  }
+
+  // To pause the camera
+  function stopVideo() {
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
+
+    tracks.forEach((track) => {
+      track.stop();
+    });
+
+    video.srcObject = null;
+    streaming = false;
+  }
+
+  document.addEventListener("DOMContentLoaded", async function () {
+    video = document.getElementById("video");
+    canvas = document.getElementById("canvas");
+    photo = document.getElementById("photo");
+    button = document.getElementById("toggle-camera");
+
+    // After the page is loaded, it will get the video streaming from the rear camera.
+    startVideo();
 
     // To show the video streaming on the page
     video.addEventListener(
@@ -126,20 +147,26 @@
       false
     );
 
-    // If the button is clicked, the still image will be taken.
-    // button.addEventListener("click", () => {
-    //   takepicture();
-    // });
-
     // If the video is clicked/tapped on, the still image will be taken.
     video.addEventListener("click", () => {
-      takepicture();
+      if (streaming) {
+        takepicture();
+      }
     });
 
     // Call the fuction to get the color after photo is loaded
     photo.addEventListener("load", function () {
       console.log("get color");
       getColor();
+    });
+
+    button.addEventListener("click", () => {
+      if (streaming) {
+        stopVideo();
+        return;
+      }
+
+      startVideo();
     });
   });
 })();
