@@ -15,6 +15,7 @@
     if (width && height) {
       canvas.width = width;
       canvas.height = height;
+      context.filter = "saturate(200%)";
       context.drawImage(video, 0, 0, width, height);
 
       const data = canvas.toDataURL("image/png");
@@ -27,7 +28,7 @@
     let dominantColor;
 
     // Get a dominant color
-    dominantColor = colorThief.getColor(photo, 1); // quality number determines how many pixels are skipped before the next one is sampled.
+    dominantColor = colorThief.getColor(photo, 5); // quality number determines how many pixels are skipped before the next one is sampled.
 
     const dominantColorHex = rgbToHex(
       dominantColor[0],
@@ -57,6 +58,7 @@
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
 
+  // To return the main camera of the mobile
   async function getVideoConstraints() {
     // get available devices
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -66,7 +68,7 @@
     for (var i = 0; i < devices.length; i++) {
       deviceLabel = devices[i].label;
       if (devices[i].kind === "videoinput") {
-        alert(devices[i].label);
+        // For andriod phones
         if (devices[i].label.includes("0")) {
           return {
             deviceId: devices[i].deviceId,
@@ -76,6 +78,7 @@
     }
     for (var i = 0; i < devices.length; i++) {
       if (devices[i].kind === "videoinput") {
+        // For iphones
         if (devices[i].label.includes("Back")) {
           return {
             deviceId: devices[i].deviceId,
