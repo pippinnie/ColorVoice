@@ -19,8 +19,6 @@
 
       const data = canvas.toDataURL("image/png");
       photo.setAttribute("src", data);
-    } else {
-      // clearphoto();
     }
   }
 
@@ -65,10 +63,12 @@
     photo = document.getElementById("photo");
     button = document.getElementById("take-photo");
 
-    // After the page is loaded, it will get the video streaming from the camera.
+    // After the page is loaded, it will get the video streaming from the rear camera.
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
+        video: {
+          facingMode: "environment",
+        },
       });
       video.srcObject = stream;
     } catch (error) {
@@ -82,8 +82,8 @@
         if (!streaming) {
           height = (video.videoHeight / video.videoWidth) * width;
 
-          video.setAttribute("width", width);
-          video.setAttribute("height", height);
+          // video.setAttribute("width", width);
+          // video.setAttribute("height", height);
           canvas.setAttribute("width", width);
           canvas.setAttribute("height", height);
           streaming = true;
@@ -93,7 +93,12 @@
     );
 
     // If the button is clicked, the still image will be taken.
-    button.addEventListener("click", () => {
+    // button.addEventListener("click", () => {
+    //   takepicture();
+    // });
+
+    // If the video is clicked/tapped on, the still image will be taken.
+    video.addEventListener("click", () => {
       takepicture();
     });
 
