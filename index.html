@@ -11,12 +11,19 @@
 
   <body>
     <h1 id="title">ColorVoice</h1>
+
+    <!-- Button to toggle camera on and off -->
     <div class="toggle">
       <button id="toggle-camera" role="button">Stop Camera</button>
     </div>
-    <video id="video" autoplay></video>
-    <div id="color-result"></div>
 
+    <!-- Video camera and result -->
+    <center>
+      <video id="video" autoplay></video>
+      <div id="color-result"></div>
+    </center>
+
+    <!-- Capture  screen and result -->
     <canvas id="canvas"> </canvas>
     <div id="capture">
       <div>Captured photo: <span id="color-result2"></span></div>
