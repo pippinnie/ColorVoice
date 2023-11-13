@@ -23,7 +23,7 @@ body {
 
 #video {
     width: 100%;
-    height: calc(100vh - 50px);
+    /* height: calc(100vh - 40px); */
 }
 
 #canvas {
@@ -38,6 +38,16 @@ body {
 
 #capture.show {
     display: block;
+}
+
+#color-result {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150px;
+    font-weight: 900;
+    -webkit-text-stroke: 1px white;
 }
 
 .toggle {
@@ -87,14 +97,4 @@ body {
 #toggle-camera:active {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
-}
-
-#color-result {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 32px;
-    font-weight: 900;
-    -webkit-text-stroke: 1px white;
 }
