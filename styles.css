@@ -1,12 +1,24 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: "JetBrains Mono", monospace;
 }
 
 #title {
     margin: 0;
     line-height: 40px;
     text-align: center;
+    color: white;
+    /* For browsers that do not support gradients */
+    background: red;
+    /* For Safari 5.1 to 6.0 */
+    background: -webkit-linear-gradient(left, orange, yellow, green, cyan, blue, violet);
+    /* For Opera 11.1 to 12.0 */
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    /* For Firefox 3.6 to 15 */
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    /* Standard syntax (must be last) */
+    background: linear-gradient(to right, orange, yellow, green, cyan, blue, violet);
 }
 
 #video {
@@ -18,10 +30,71 @@ body {
     display: none;
 }
 
-/* .output {
+#capture {
     display: none;
-} */
+    text-align: center;
+    margin-top: 10px;
+}
+
+#capture.show {
+    display: block;
+}
 
 .toggle {
     text-align: center;
+}
+
+#toggle-camera {
+    margin: 10px;
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #36395A;
+    cursor: pointer;
+    display: inline-flex;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+#toggle-camera:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+#toggle-camera:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+#toggle-camera:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+#color-result {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: 900;
+    -webkit-text-stroke: 1px white;
 }

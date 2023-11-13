@@ -7,7 +7,10 @@
   let video = null;
   let canvas = null;
   let photo = null;
-  let button = null;
+  let toggle = null;
+  let result = null;
+  let result2 = null;
+  let timeoutID = null;
 
   // Take a still image from the streaming video into the 'photo' element
   function takepicture() {
@@ -17,15 +20,20 @@
       canvas.width = width;
       canvas.height = height;
 
-      // adjust to have more saturation
+      // adjust the image to have more saturation
       context.filter = "saturate(200%)";
+
       context.drawImage(video, 0, 0, width, height);
 
       const data = canvas.toDataURL("image/png");
       photo.setAttribute("src", data);
+
+      // To show the captured photo on screen
+      document.getElementById("capture").classList.add("show");
     }
   }
 
+  // Get the color result
   function getColor() {
     const colorThief = new ColorThief();
     let dominantColor;
@@ -41,15 +49,31 @@
 
     console.log(dominantColor, dominantColorHex);
 
+    // Get the nearest color
     var getNearestColor = nearestColor.from(colors);
-
     const colorResult = getNearestColor(dominantColorHex);
-
     console.log(colorResult);
 
+    // Text to speech to say the color name out loud
     var msg = new SpeechSynthesisUtterance();
     msg.text = colorResult.name;
     window.speechSynthesis.speak(msg);
+
+    // Show the color result name in the middle of the screen
+    if (timeoutID) {
+      clearTimeout(timeoutID);
+    }
+    result.innerText = colorResult.name;
+    result.style.color = colorResult.value;
+
+    // Remove the color result name from the screen
+    timeoutID = setTimeout(() => {
+      result.innerText = "";
+    }, 5000);
+
+    // Log the color result name at the capture section
+    result2.innerText = colorResult.name;
+    result2.style.color = colorResult.value;
   }
 
   function componentToHex(c) {
@@ -125,7 +149,9 @@
     video = document.getElementById("video");
     canvas = document.getElementById("canvas");
     photo = document.getElementById("photo");
-    button = document.getElementById("toggle-camera");
+    toggle = document.getElementById("toggle-camera");
+    result = document.getElementById("color-result");
+    result2 = document.getElementById("color-result2");
 
     // After the page is loaded, it will get the video streaming from the rear camera.
     startVideo();
@@ -160,13 +186,27 @@
       getColor();
     });
 
-    button.addEventListener("click", () => {
+    // When the toggle button is clicked
+    toggle.addEventListener("click", () => {
+      // Close the video screen, reset the color result and reset the captured photo if video streaming is currently on
       if (streaming) {
         stopVideo();
+
+        // Clear the results
+        result.innerText = "";
+        result2.innerText = "";
+        photo.setAttribute("src", null);
+        // To remove the captured photo from screen
+        document.getElementById("capture").classList.remove("show");
+        // To change the toggle button name
+        toggle.innerText = "Open Camera";
         return;
       }
 
+      // Start the video screen if video streaming is currently off
       startVideo();
+      // To change the toggle button name
+      toggle.innerText = "Stop Camera";
     });
   });
 })();

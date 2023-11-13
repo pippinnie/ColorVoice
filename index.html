@@ -12,13 +12,15 @@
   <body>
     <h1 id="title">ColorVoice</h1>
     <div class="toggle">
-      <button id="toggle-camera">Toggle Camera</button>
+      <button id="toggle-camera" role="button">Stop Camera</button>
     </div>
     <video id="video" autoplay></video>
+    <div id="color-result"></div>
 
     <canvas id="canvas"> </canvas>
-    <div class="output">
-      <img id="photo" alt="The screen capture will appear in this box." />
+    <div id="capture">
+      <div>Captured photo: <span id="color-result2"></span></div>
+      <img id="photo" alt="The screen capture appears here." />
     </div>
   </body>
 </html>
