@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="google" content="notranslate" />
+    <meta http-equiv="Content-Language" content="en" />
+    <script src="rgbquant.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
-    <script src="nearestColor.js"></script>
     <script src="colors.js"></script>
+    <script src="findColor.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <title>ColorVoice Buddy</title>
@@ -18,13 +21,13 @@
     </div>
 
     <!-- Video camera and result -->
-    <center>
-      <video id="video" autoplay></video>
+    <div id="main-screen">
+      <div><video id="video" autoplay></video></div>
       <div id="color-result"></div>
-    </center>
+    </div>
 
     <!-- Capture  screen and result -->
-    <canvas id="canvas"> </canvas>
+    <canvas id="canvas"></canvas>
     <div id="capture">
       <div>Captured photo: <span id="color-result2"></span></div>
       <img id="photo" alt="The screen capture appears here." />

@@ -1,5 +1,5 @@
 // Set color names
-var colors = {
+const COLORS = {
   IndianRed: "#CD5C5C",
   LightCoral: "#F08080",
   Salmon: "#FA8072",

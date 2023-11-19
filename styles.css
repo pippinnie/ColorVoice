@@ -21,6 +21,10 @@ body {
     background: linear-gradient(to right, orange, yellow, green, cyan, blue, violet);
 }
 
+#main-screen {
+    text-align: center;
+}
+
 #video {
     width: 100%;
     max-width: 1024px;
