@@ -20,11 +20,13 @@
       canvas.width = width;
       canvas.height = height;
 
-      // adjust the image to have more saturation
+      // adjust the image 
       context.filter = "saturate(120%) contrast(150%)";
 
+      // capture from video to canvas
       context.drawImage(video, 0, 0, width, height);
 
+      // capture from canvas to image
       const data = canvas.toDataURL("image/png");
       photo.setAttribute("src", data);
 

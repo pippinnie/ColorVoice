@@ -46,6 +46,7 @@ body {
 }
 
 #color-result {
+    text-transform: capitalize;
     text-align: center;
     position: fixed;
     top: 50%;
@@ -56,6 +57,11 @@ body {
     overflow-wrap: break-word;
     font-weight: 900;
     -webkit-text-stroke: 1px white;
+}
+
+#color-result2 {
+    text-transform: capitalize;
+    text-shadow: black 1px 1px;
 }
 
 .toggle {
