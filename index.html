@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-    <link rel="manifest" href="site.webmanifest" />
+    <!-- <link rel="manifest" href="site.webmanifest" /> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
     <script src="colors.js"></script>
@@ -23,18 +23,23 @@
 
     <!-- Button to toggle camera on and off -->
     <div class="toggle">
-      <button id="toggle-camera" role="button">Stop Camera</button>
+      <!-- <button id="toggle-camera" role="button">Turn off Camera</button> -->
+      <button id="toggle-camera" role="button">Turn off Camera</button>
     </div>
 
     <!-- Video camera and result -->
     <div id="main-screen">
-      <video id="video" autoplay aria-label="Capture a photo"></video>
+      <div id="video-container">
+        <video id="video" autoplay aria-label="Capture a photo"></video>
+        <!-- Focus area -->
+        <div id="focus-area"></div>
+      </div>
       <div id="color-result"></div>
     </div>
 
     <!-- Capture  screen and result -->
     <canvas id="canvas"></canvas>
-    <div id="capture">
+    <div id="capture-area">
       <div>Captured photo: <span id="color-result2" aria-live="polite" role="status"></span></div>
       <img id="photo" alt="The screen capture appears here." />
     </div>

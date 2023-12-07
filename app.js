@@ -1,6 +1,7 @@
 (() => {
-  const width = 320;
-  let height = 0; // This will be computed based on the input stream
+  const focusSize = 50;
+  let focusX = 0;
+  let focusY = 0;
 
   let streaming = false; // Video from the camera. Start at false.
 
@@ -16,23 +17,28 @@
   function takepicture() {
     const context = canvas.getContext("2d");
 
-    if (width && height) {
-      canvas.width = width;
-      canvas.height = height;
+    // adjust the image
+    // context.filter = "saturate(120%) contrast(150%)";
 
-      // adjust the image 
-      context.filter = "saturate(120%) contrast(150%)";
+    // capture from video to canvas
+    context.drawImage(
+      video,
+      focusX,
+      focusY,
+      focusSize,
+      focusSize,
+      0,
+      0,
+      focusSize,
+      focusSize
+    );
 
-      // capture from video to canvas
-      context.drawImage(video, 0, 0, width, height);
+    // capture from canvas to image
+    const data = canvas.toDataURL("image/png");
+    photo.setAttribute("src", data);
 
-      // capture from canvas to image
-      const data = canvas.toDataURL("image/png");
-      photo.setAttribute("src", data);
-
-      // To show the captured photo on screen
-      document.getElementById("capture").classList.add("show");
-    }
+    // To show the captured photo on screen
+    document.getElementById("capture-area").classList.add("show");
   }
 
   // Get the color result
@@ -41,7 +47,7 @@
     let dominantColor;
 
     // Get a dominant color
-    dominantColor = colorThief.getColor(photo, 1); // quality number determines how many pixels are skipped before the next one is sampled.
+    dominantColor = colorThief.getColor(photo, 0); // quality number determines how many pixels are skipped before the next one is sampled.
 
     const dominantColorHex = rgbToHex(
       dominantColor[0],
@@ -153,6 +159,14 @@
     toggle = document.getElementById("toggle-camera");
     result = document.getElementById("color-result");
     result2 = document.getElementById("color-result2");
+    captureArea = document.getElementById("capture-area");
+    focusArea = document.getElementById("focus-area");
+
+    // Set canvas size
+    canvas.width = focusSize;
+    canvas.height = focusSize;
+    canvas.setAttribute("width", focusSize);
+    canvas.setAttribute("height", focusSize);
 
     // After the page is loaded, it will get the video streaming from the rear camera.
     startVideo();
@@ -162,12 +176,15 @@
       "canplay",
       (ev) => {
         if (!streaming) {
-          height = (video.videoHeight / video.videoWidth) * width;
-
+          // height = (video.videoHeight / video.videoWidth) * width;
           // video.setAttribute("width", width);
           // video.setAttribute("height", height);
-          canvas.setAttribute("width", width);
-          canvas.setAttribute("height", height);
+
+          focusX = video.videoWidth / 2 - focusSize / 2;
+          focusY = video.videoHeight / 2 - focusSize / 2;
+
+          // To add focus area on the video
+          focusArea.classList.add("show");
           streaming = true;
         }
       },
@@ -197,16 +214,18 @@
         result2.innerText = "";
         photo.setAttribute("src", null);
         // To remove the captured photo from screen
-        document.getElementById("capture").classList.remove("show");
+        captureArea.classList.remove("show");
+        // To remove the focus area from screen
+        focusArea.classList.remove("show");
         // To change the toggle button name
-        toggle.innerText = "Open Camera";
+        toggle.innerText = "Turn on Camera";
         return;
       }
 
       // Start the video screen if video streaming is currently off
       startVideo();
       // To change the toggle button name
-      toggle.innerText = "Stop Camera";
+      toggle.innerText = "Turn off Camera";
     });
   });
 })();

@@ -1,22 +1,46 @@
 // Set color names
 
-const COLORS = {  
-  red: "#f00",
-  yellow: "#ff0",
-  blue: "#00f",
-  white: "#fff",
-  black: "#000",
-  silver: "#C0C0C0",
-  grey: "#808080",
-  maroon: "#800000",
-  olive: "#808000",
-  lime: "#00FF00",
-  green: "#008000",
-  aqua: "#00FFFF",
-  teal: "#008080",
-  navy: "#000080",
-  fuchsia: "#FF00FF",
-  purple: "#800080",
+const COLORS = {
+  White: "#FFFFFF",
+  Black: "#000000",
+  Grey: "#808080",
+  LightGrey: "#D3D3D3",
+  DarkGrey: "#A9A9A9",
+
+  Red: "#FF0000",
+  Lime: "#00FF00",
+  Blue: "#0000FF",
+
+  Maroon: "#800000",
+  Green: "#008000",
+  Navy: "#000080",
+
+  Magenta: "#FF00FF", // Fuchsia
+  Yellow: "#FFFF00",
+  Cyan: "#00FFFF", // Aqua
+
+  Purple: "#800080",
+  Olive: "#808000",
+  Teal: "#008080",
+
+  LightCoral: "#FF8080",
+  LightLime: "#80FF80",
+  LightBlue: "#8080FF",
+
+  LightMagenta: "#FF80FF",
+  LightYellow: "#FFFF80",
+  LightAqua: "#80FFFF",
+
+  Silver: "#C0C0C0",
+  Gold: "#FFD700",
+
+  Orange: "#FFA500",
+  Pink: "#FFC0CB",
+  Brown: "#A52A2A",
+  Lavender: "#E6E6FA",
+  Beige: "#F5F5DC",
+  Khaki: "#F0E68C",
+  DarkKhaki: "#BDB76B",
 };
 
 const COLORS2 = {
