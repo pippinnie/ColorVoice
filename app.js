@@ -12,6 +12,8 @@
   let result = null;
   let result2 = null;
   let timeoutID = null;
+  let captureArea = null;
+  let focusArea = null;
 
   // Take a still image from the streaming video into the 'photo' element
   function takepicture() {
@@ -137,6 +139,9 @@
     } catch (error) {
       console.error("Error accessing the camera: " + error);
     }
+
+    // To change the toggle button name if camera was off
+    toggle.innerText = "Turn off Camera";
   }
 
   // To pause the camera
@@ -150,6 +155,18 @@
 
     video.srcObject = null;
     streaming = false;
+
+    // Clear the results
+    result.innerText = "";
+    result2.innerText = "";
+    // To remove the captured photo from screen
+    photo.setAttribute("src", null);
+    captureArea.classList.remove("show");
+    // To remove the focus area from screen
+    focusArea.classList.remove("show");
+    // To change the toggle button name
+    toggle.innerText = "Turn on Camera";
+    return;
   }
 
   document.addEventListener("DOMContentLoaded", async function () {
@@ -208,24 +225,10 @@
       // Close the video screen, reset the color result and reset the captured photo if video streaming is currently on
       if (streaming) {
         stopVideo();
-
-        // Clear the results
-        result.innerText = "";
-        result2.innerText = "";
-        photo.setAttribute("src", null);
-        // To remove the captured photo from screen
-        captureArea.classList.remove("show");
-        // To remove the focus area from screen
-        focusArea.classList.remove("show");
-        // To change the toggle button name
-        toggle.innerText = "Turn on Camera";
-        return;
       }
 
       // Start the video screen if video streaming is currently off
       startVideo();
-      // To change the toggle button name
-      toggle.innerText = "Turn off Camera";
     });
   });
 })();

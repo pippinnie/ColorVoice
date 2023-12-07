@@ -4,8 +4,6 @@ const COLORS = {
   White: "#FFFFFF",
   Black: "#000000",
   Grey: "#808080",
-  LightGrey: "#D3D3D3",
-  DarkGrey: "#A9A9A9",
 
   Red: "#FF0000",
   Lime: "#00FF00",
@@ -31,16 +29,18 @@ const COLORS = {
   LightYellow: "#FFFF80",
   LightAqua: "#80FFFF",
 
-  Silver: "#C0C0C0",
-  Gold: "#FFD700",
-
   Orange: "#FFA500",
   Pink: "#FFC0CB",
   Brown: "#A52A2A",
-  Lavender: "#E6E6FA",
-  Beige: "#F5F5DC",
-  Khaki: "#F0E68C",
-  DarkKhaki: "#BDB76B",
+
+  // LightGrey: "#D3D3D3",
+  // DarkGrey: "#A9A9A9",
+  // Silver: "#C0C0C0",
+  // Gold: "#FFD700",
+  // Lavender: "#E6E6FA",
+  // Beige: "#F5F5DC",
+  // Khaki: "#F0E68C",
+  // DarkKhaki: "#BDB76B",
 };
 
 const COLORS2 = {
