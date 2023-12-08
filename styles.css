@@ -40,9 +40,14 @@ body {
 }
 
 #capture-area {
+    padding: 10px;
     display: none;
     text-align: center;
-    margin-top: 10px;
+    background-color: #000;
+}
+
+#photo {
+    margin: 5px;
 }
 
 #capture-area.show {
@@ -50,6 +55,32 @@ body {
 }
 
 #color-result {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 100px;
+    inline-size: 100%;
+    overflow-wrap: break-word;
+    font-weight: 900;
+    /* -webkit-text-stroke: 1px white; */
+}
+
+.light #photo {
+    border: 2px solid white;
+}
+
+.light #color-result {
+    color: white;
+}
+
+.dark #photo {
+    border: 2px solid black;
+}
+
+.dark #color-result {
+    color: black;
+}
+
+/* #color-result {
     text-transform: capitalize;
     text-align: center;
     position: absolute;
@@ -61,7 +92,7 @@ body {
     overflow-wrap: break-word;
     font-weight: 900;
     -webkit-text-stroke: 1px white;
-}
+} */
 
 #focus-area {
     height: 50px;
@@ -77,10 +108,6 @@ body {
 
 #focus-area.show {
     display: block;
-}
-
-#photo {
-    border: 1px solid black;
 }
 
 #color-result2 {

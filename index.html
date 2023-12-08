@@ -27,22 +27,22 @@
       <button id="toggle-camera" role="button">Turn off Camera</button>
     </div>
 
-    <!-- Video camera and result -->
     <div id="main-screen">
+      <!-- Video camera -->
       <div id="video-container">
         <video id="video" autoplay aria-label="Capture a photo"></video>
         <!-- Focus area -->
         <div id="focus-area"></div>
+      </div>
+      
+      <!-- Capture  screen and result -->
+      <div id="capture-area">
+        <img id="photo" alt="The screen capture appears here." />
         <div id="color-result"></div>
+        <!-- <span id="color-result2" aria-live="polite" role="status"></span> -->
       </div>
     </div>
 
-    <!-- Capture  screen and result -->
     <canvas id="canvas"></canvas>
-    <div id="capture-area">
-      Captured photo:
-      <img id="photo" alt="The screen capture appears here." />
-      <span id="color-result2" aria-live="polite" role="status"></span>
-    </div>
   </body>
 </html>

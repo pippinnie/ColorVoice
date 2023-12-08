@@ -10,8 +10,8 @@
   let photo = null;
   let toggle = null;
   let result = null;
-  let result2 = null;
-  let timeoutID = null;
+  // let result2 = null;
+  // let timeoutID = null;
   let captureArea = null;
   let focusArea = null;
 
@@ -20,6 +20,7 @@
     const context = canvas.getContext("2d");
 
     // adjust the image
+    context.filter = "contrast(150%)";
     // context.filter = "saturate(120%) contrast(150%)";
 
     // capture from video to canvas
@@ -69,20 +70,39 @@
     window.speechSynthesis.speak(msg);
 
     // Show the color result name in the middle of the screen
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
+    // if (timeoutID) {
+    //   clearTimeout(timeoutID);
+    // }
     result.innerText = colorResult.name;
-    result.style.color = colorResult.value;
+    captureArea.style.backgroundColor = colorResult.value;
+
+    setLumaMode(colorResult.rgb);
 
     // Remove the color result name from the screen
-    timeoutID = setTimeout(() => {
-      result.innerText = "";
-    }, 5000);
+    // timeoutID = setTimeout(() => {
+    //   result.innerText = "";
+    // }, 5000);
 
     // Log the color result name at the capture section
-    result2.innerText = colorResult.name;
-    result2.style.color = colorResult.value;
+    // result2.innerText = colorResult.name;
+    // result2.style.color = colorResult.value;
+  }
+
+  function setLumaMode({ r, g, b }) {
+    // Calculate image brightness
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+    // Remove any existing mode class
+    captureArea.classList.remove("light");
+    captureArea.classList.remove("dark");
+
+    // If image is dark, add light mode
+    if (luma < 128) {
+      captureArea.classList.add("light");
+    } else {
+      // If image is bright, add dark mode
+      captureArea.classList.add("dark");
+    }
   }
 
   function componentToHex(c) {
@@ -158,7 +178,7 @@
 
     // Clear the results
     result.innerText = "";
-    result2.innerText = "";
+    // result2.innerText = "";
     // To remove the captured photo from screen
     photo.setAttribute("src", null);
     captureArea.classList.remove("show");
@@ -175,7 +195,7 @@
     photo = document.getElementById("photo");
     toggle = document.getElementById("toggle-camera");
     result = document.getElementById("color-result");
-    result2 = document.getElementById("color-result2");
+    // result2 = document.getElementById("color-result2");
     captureArea = document.getElementById("capture-area");
     focusArea = document.getElementById("focus-area");
 
