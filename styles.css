@@ -25,6 +25,10 @@ body {
     text-align: center;
 }
 
+#video-container {
+    position: relative;
+}
+
 #video {
     width: 100%;
     max-width: 1024px;
