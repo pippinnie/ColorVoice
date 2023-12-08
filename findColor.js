@@ -40,6 +40,14 @@ function hexToRgb(hexColor) {
   return { r: red, g: green, b: blue };
 }
 
+function euclideanDistance(colorA, colorB) {
+  return Math.sqrt(
+    Math.pow(colorA.r - colorB.r, 2) +
+      Math.pow(colorA.g - colorB.g, 2) +
+      Math.pow(colorA.b - colorB.b, 2)
+  );
+}
+
 // Match the detected color with the closest color from the color list
 function findColor(sourceColorHex) {
   sourceColorRgb = hexToRgb(sourceColorHex);
@@ -47,15 +55,12 @@ function findColor(sourceColorHex) {
   let minDistance = Infinity;
   let foundColor;
 
-  // Loop over the color list  
+  // Loop over the color list
   for (var i = 0; i < MAP_COLORS.length; ++i) {
     const colorListRgb = MAP_COLORS[i].rgb;
 
-    // Find the color with the closest/shortest distance with the sum of squares method
-    distance =
-      Math.pow(sourceColorRgb.r - colorListRgb.r, 2) +
-      Math.pow(sourceColorRgb.g - colorListRgb.g, 2) +
-      Math.pow(sourceColorRgb.b - colorListRgb.b, 2);
+    // Find the euclidean distance between colors
+    distance = euclideanDistance(sourceColorRgb, colorListRgb);
 
     if (distance < minDistance) {
       minDistance = distance;

@@ -64,6 +64,10 @@
     const colorResult = findColor(dominantColorHex);
     console.log("Matched color: ", colorResult);
 
+    showColor(colorResult)
+  }
+
+  function showColor(colorResult) {
     // Text to speech to say the color name out loud
     var msg = new SpeechSynthesisUtterance();
     msg.text = colorResult.name;
@@ -73,9 +77,14 @@
     // if (timeoutID) {
     //   clearTimeout(timeoutID);
     // }
+
+    // Show color name as text output
     result.innerText = colorResult.name;
+
+    // Set bg of capture area to the matched color
     captureArea.style.backgroundColor = colorResult.value;
 
+    // Look for brightness of the captured photo
     setLumaMode(colorResult.rgb);
 
     // Remove the color result name from the screen
@@ -89,7 +98,7 @@
   }
 
   function setLumaMode({ r, g, b }) {
-    // Calculate image brightness
+    // Calculate image brightness (luma)
     const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
     // Remove any existing mode class
