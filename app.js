@@ -64,7 +64,7 @@
     const colorResult = findColor(dominantColorHex);
     console.log("Matched color: ", colorResult);
 
-    showColor(colorResult)
+    showColor(colorResult);
   }
 
   function showColor(colorResult) {
@@ -195,7 +195,6 @@
     focusArea.classList.remove("show");
     // To change the toggle button name
     toggle.innerText = "Turn on Camera";
-    return;
   }
 
   document.addEventListener("DOMContentLoaded", async function () {
@@ -254,6 +253,7 @@
       // Close the video screen, reset the color result and reset the captured photo if video streaming is currently on
       if (streaming) {
         stopVideo();
+        return;
       }
 
       // Start the video screen if video streaming is currently off
